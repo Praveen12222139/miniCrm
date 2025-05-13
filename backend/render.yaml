@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: minicrm-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DB_HOST
+        fromDatabase:
+          name: minicrm-db
+          property:connectionString
+    plan: free
+    numInstances: 1
+
+databases:
+  - name: minicrm-db
+    databaseName: minicrm
+    user: minicrm_user
+    plan: free
